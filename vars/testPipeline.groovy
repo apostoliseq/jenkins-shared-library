@@ -6,7 +6,6 @@ def call() {
           yaml """
           kind: Pod
           spec:
-            serviceAccountName: jenkins
             containers:
             - name: docker
               image: docker:19.03.1-dind
