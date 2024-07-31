@@ -8,7 +8,7 @@ def call() {
           spec:
             containers:
             - name: docker
-              image: docker:27.1.1-dind
+              image: docker:25.0.5-dind
               command:
               - dockerd-entrypoint.sh
               args:
