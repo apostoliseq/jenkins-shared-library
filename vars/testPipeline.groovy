@@ -78,7 +78,7 @@ def call() {
               withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                 sh 'docker build -t apostoliseq/test-app:1.0 -f ./src/main/docker/Dockerfile.jvm .'
                 sh 'docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD" docker.io'
-                sh 'docker push test-app:1.0'
+                sh 'docker push apostoliseq/test-app:1.0'
               }
             }
           }
