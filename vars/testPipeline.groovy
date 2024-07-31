@@ -14,7 +14,7 @@ def call() {
               args:
               - --insecure-registry=10.43.232.207:8082
               securityContext:
-              privileged: true
+                privileged: true
             - name: maven
               image: maven:3.8.5-openjdk-17
               command:
