@@ -126,7 +126,7 @@ def call() {
               sh 'docker push $NEXUS_URL:$DOCKER_REPO_PORT/$DOCKER_REPO_PATH/apostoliseq/test-agent:1.0'
         }
       }
-          stage('Use Nexus Repository to Dpeloy a New Agent') {
+          stage('Use Nexus Repository to Deploy New Agent') {
             agent {
               kubernetes {
                 defaultContainer 'testagent'
