@@ -119,6 +119,37 @@ def call() {
           }
         }
       }
+          stage('Build Dockerfile.agent and Push it to Nexus') {
+            steps {
+              sh 'docker build -t apostoliseq/test-agent:1.0 -f ./Dockerfile.agent .'
+              sh 'docker tag apostoliseq/test-agent:1.0 $NEXUS_URL:$DOCKER_REPO_PORT/$DOCKER_REPO_PATH/apostoliseq/test-agent:1.0'
+              sh 'docker push $NEXUS_URL:$DOCKER_REPO_PORT/$DOCKER_REPO_PATH/apostoliseq/test-agent:1.0'
+        }
+      }
+          stage('Use Nexus Repository to Dpeloy a New Agent') {
+            agent {
+              kubernetes {
+                defaultContainer 'testagent'
+                yaml """
+                kind: Pod
+                spec:
+                  containers:
+                  - name: testagent
+                    image: $NEXUS_URL:$DOCKER_REPO_PORT/$DOCKER_REPO_PATH/apostoliseq/test-agent:1.0
+                    command:
+                    - cat
+                    tty: true
+                  imagePullSecrets:
+                  - nexus-docker-secret
+                """
+              }
+            }
+          steps {
+            container('testagent') {
+            sh 'echo Hello from testagent'
+          }
+        }
+      }
     }
   }
 }
