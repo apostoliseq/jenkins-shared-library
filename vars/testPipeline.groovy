@@ -12,7 +12,7 @@ def call() {
               command:
               - dockerd-entrypoint.sh
               args:
-              - --insecure-registry=10.43.232.207:8082
+              - --insecure-registry=nexus-repo-nexus-repository-manager:8082
               securityContext:
                 privileged: true
             - name: maven
@@ -40,7 +40,7 @@ def call() {
   
           DOCKERHUB_CREDS = 'dockerhub'
   
-          NEXUS_URL = '10.43.232.207'
+          NEXUS_URL = 'nexus-repo-nexus-repository-manager'
           NEXUS_PORT = '8081'
           DOCKER_REPO_PORT = '8082'
           DOCKER_REPO_PATH = 'repository/docker-repo'
